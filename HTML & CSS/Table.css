@@ -1,0 +1,20 @@
+table{
+    border-collapse: collapse;
+    text-align: center;
+    width:100%;
+}
+
+table,th,td{
+border:1px solid black;
+}
+
+
+tr:hover {background-color:rgb(121, 193, 127);}
+
+h1 {
+    text-align: center;
+}
+
+th{
+    background-color: rgb(139, 131, 152);
+}

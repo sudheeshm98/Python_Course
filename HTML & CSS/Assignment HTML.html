@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment</title>
+
+    <style>
+    .required-star {
+      color: red;
+    }
+
+    .container{
+    position:relative;
+    width:1200px;
+    height: 300px;
+    margin: 240px auto;
+    }
+    .container .box{
+    position:relative;
+    padding: 25px;
+    width:900px;
+    height:400px;
+    background:#f5f5f5;
+    border:1px solid #ccc;
+    border-radius:10px;
+    margin:20px auto;
+
+    hr{
+    margin:20px auto;
+    }
+
+    input[type="text"]{
+    outline:0;
+    width:100%;
+    margin-right:10px;
+
+
+    }
+
+    </style>
+
+
+</head>
+<body>
+<div class="container">
+    <div class="box">
+
+
+        <form>
+
+            <h1 style="text-align:center"> Complaints </h1>
+
+            <hr color="black" size="6" width="100%">
+            <br><br>
+
+
+            <label for="full-name">Full Name<span class="required-star">*</span></label>
+            <input id="First-name" name="First-name" placeholder="First" type="text">
+            <input id="Last-name" name="Last-name" placeholder="Last" type="text"><br>
+
+            <label for="Email">Email<span class="required-star">*</span></label>
+            <input id="Email" name="Email" placeholder="Email" style="margin-top: 20px;" type="text"><br>
+
+            <label for="Phone">Phone<span class="required-star">*</span></label>
+            <input id="Phone" name="Phone" placeholder="Phone" style="margin-top: 20px;" type="text"><br>
+
+            <label for="Message">Where did we go wrong<span class="required-star">*</span></label>
+            <textarea cols="50" id="Message" name="Message" placeholder="Enter your complaint details " rows="4"
+                      style="margin-top: 20px;"></textarea><br>
+
+
+            <input style="margin-top: 40px; background-color: red; color: white;" type="submit" value="Submit">
+
+    </form>
+    </div>
+</div>
+</body>
+</html>

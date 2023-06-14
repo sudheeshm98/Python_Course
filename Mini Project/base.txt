@@ -1,0 +1,100 @@
+import mysql.connector
+
+# my_db = mysql.connector.connect(host="localhost", user="root", password="Heisenberg_123")
+# print(my_db)
+#
+# my_cursor = my_db.cursor()
+
+# my_cursor.execute('create database vehicle_rental_db')
+# my_cursor.execute('show databases')
+# for x in my_cursor:
+#     print(x)
+
+# my_cursor.execute('use vehicle_rental_db')
+
+create_users_table_query = """create table users( 
+                  id int auto_increment primary key,
+                  name varchar(250) not null,
+                  password varchar(250) not null,
+                  email varchar(250) not null,
+                  created_at timestamp default current_timestamp
+                  )"""
+
+# my_cursor.execute(create_users_table_query)
+
+
+create_cars_table_query = """create table cars(
+                  id int auto_increment primary key,
+                  make varchar(255) not null,
+                  model varchar(255) not null,
+                  year int not null,
+                  price decimal(10,2) not null,
+                  registration_number varchar(20) not null,
+                  availability boolean not null,
+                  user_id int,
+                  foreign key(user_id) references users(id)
+                  )
+                  """
+
+# my_cursor.execute(create_cars_table_query)
+
+
+class User:
+    def __init__(self, host, user, password, database):
+        self.mydb = mysql.connector.connect(host=host, user=user, password=password, database=database)
+        self.mycursor = self.mydb.cursor()
+
+    def register_user(self):
+        while True:
+            name = input("Name:")
+            email = input("Email:")
+            password = input("Password:")
+
+            query = f"select * from users where email='{email}'"
+            self.mycursor.execute(query)
+            result = self.mycursor.fetchone()
+
+            if result:
+                print('user already exist. Please try again')
+            else:
+                query = f"insert into users(name, password, email) values ('{name}', '{password}', '{email}')"
+                self.mycursor.execute(query)
+                self.mydb.commit()
+                print("User registered successfully")
+                break
+
+    def login_user(self):
+        while True:
+            email = input("Email:")
+            password = input("Password:")
+            query = f"select * from users where email='{email}' and password='{password}'"
+            self.mycursor.execute(query)
+            result = self.mycursor.fetchone()
+
+            if result:
+                print('Login successful')
+                # add further function calls here
+                break
+            else:
+                print('Invalid email or password')
+
+    def start(self):
+        while True:
+            print('Welcome to RentACar')
+            print('1. User login\n2. Register new user')
+            option = int(input('enter your option:'))
+
+            if option == 1:
+                self.login_user()
+                break
+
+            elif option == 2:
+                self.register_user()
+                break
+
+            else:
+                print('Please enter a valid option')
+
+
+test_user = User('localhost', 'root', 'Heisenberg_123', 'vehicle_rental_db')
+test_user.start()
